@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Just for Today</title>
+    <style>
+        div {
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            padding: 3em;
+            text-align: center;
+        }
+
+        .content {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div style="align-items: center;">
+        <h1 class="text-primary">{{ data["title"] }}</h1>
+        <p class="text-secondary" style="margin: 1em 1em;"><em>"{{ data["reading"] }}"</em></p>
+        <p class="text-muted"><a href="https://www.aa.org/daily-reflections" target="_blank" class="primary-link">{{ data["source"] }}</a>, {{ data["date"] }}</p>
+        {% for para in data["thought"].split("\n") %}
+            <p class="content">{{para}}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
