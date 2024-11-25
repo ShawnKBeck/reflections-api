@@ -1,4 +1,3 @@
-
 from Database import DATABASE
 import flask 
 from flask import render_template, jsonify
@@ -10,14 +9,12 @@ app = flask.Flask(__name__)
 @app.route('/today', methods=['GET'])
 @app.route('/', methods=['GET'])
 def today():
-    today = date.today()
-    data = DATABASE[str(int(today.month))][str(int(today.day))]
-    # print(data, today.month, today.day)
-    return render_template('home.html', data=data)
+    # These routes will now just serve as entry points
+    # The JavaScript will redirect to the correct date
+    return render_template('home.html')
 
 @app.route('/<month>/<day>', methods=['GET'])
 def specific(month, day):
-    # print(month, day)
     if month not in DATABASE or day not in DATABASE[month]:
         return jsonify({"response": 404, "content": "invalid date"})
 
@@ -41,6 +38,5 @@ def api(month=date.today().month, day=date.today().day):
     data = DATABASE[str(month)][str(day)]
     return jsonify(data)
 
-# if __name__ == "__main__":
-#    app.run(host='0.0.0.0', port=8080)
-
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
